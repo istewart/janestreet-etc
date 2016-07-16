@@ -3,17 +3,14 @@ import java.util.List;
 import java.lang.Integer;
 
 public class ParserV1 implements Parser {
-	private final BufferedReader in;
 	private final BookV1 book;
 
-	public ParserV1(BufferedReader in, BookV1 book) {
-		this.in = in;
+	public ParserV1(BookV1 book) {
 		this.book = book;
 	}
 
-	public void parse() {
-		String s = in.readLine().trim();
-		String[] split = s.split();
+	public void parse(String s) {
+		String[] split = s.split(" ");
 
 		switch (split[0]) {
 			case "HELLO": parseHello(split);
@@ -96,12 +93,12 @@ public class ParserV1 implements Parser {
 		int price = Integer.parseInt(split[2]);
 		int size = Integer.parseInt(split[3]);
 
-		this.book.trade(symbol, price, size);
+		// this.book.trade(symbol, price, size);
 	}
 
 	public void parseAck(String[] split) {
 		int orderID = Integer.parseInt(split[1]);
-		this.book.updateOrder(orderID, "ACK");
+		// this.book.updateOrder(orderID, "ACK");
 	}
 
 	public void parseReject(String[] split) {
@@ -109,7 +106,7 @@ public class ParserV1 implements Parser {
 		String reason = split[2];
 
 		System.out.println("ORDER " + orderID + "REJECTED: " + reason);
-		this.book.updateOrder(orderID, "REJECTED");
+		// this.book.updateOrder(orderID, "REJECTED");
 	}
 
 	public void parseFill(String[] split) {
@@ -119,11 +116,11 @@ public class ParserV1 implements Parser {
 		int price = Integer.parseInt(split[4]);
 		int size = Integer.parseInt(split[5]);
 
-		this.book.fillOrder(orderID, symbol, type, price, size);
+		// this.book.fillOrder(orderID, symbol, type, price, size);
 	}
 
 	public void parseOut(String[] split) {
 		int orderID = Integer.parseInt(split[1]);
-		this.book.updateOrder(orderID, "OUT");
+		// this.book.updateOrder(orderID, "OUT");
 	}
 }

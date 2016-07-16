@@ -1,3 +1,3 @@
 public interface Parser {
-	public void parse();
+	public void parse(String s);
 }
