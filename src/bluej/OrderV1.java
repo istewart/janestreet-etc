@@ -1,17 +1,35 @@
 public class OrderV1 implements Order {
+    int id;
+    String name;
+    Action action;
+    double price;
+    int amount;
+    
+    public OrderV1(int id, String name, Action action, double price, int amount) {
+        this.id = id;
+        this.name = name;
+        this.action = action;
+        this.price = price;
+        this.amount = amount;
+    }
+    
+    public int getId() {
+        return id;
+    }
+    
     public String getName() {
-        return "";
+        return name;
     }
     
     public Action getAction() {
-        return Action.NONE;
+        return action;
     }
     
     public double getPrice() {
-        return 0;
+        return price;
     }
     
     public int getAmount() {
-        return 0;
+        return amount;
     }
 }

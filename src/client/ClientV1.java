@@ -35,29 +35,37 @@ public class ClientV1 implements Client {
 
 	public Order buy(Equity e, int price, int size) {
 		int order_id = nextID();
-		String symbol = e.getSymbol();
+		String symbol = e.getName();
+
+		//OrderV1 order = new OrderV1(order_id, Action.BUY, price, size);
 
 		out.println("ADD " + order_id + " " + symbol + " BUY " + price + " " + size);
+		return null;
 	}
 
 	public Order sell(Equity e, int price, int size) {
 		int orderID = nextID();
-		String symbol = e.getSymbol();
+		String symbol = e.getName();
+
+		//OrderV1 order = new OrderV1(order_id, Action.SELL, price, size);
 
 		out.println("ADD " + orderID + " " + symbol + " SELL " + price + " " + size);
+		return null;
 	}
 	
 	public Order cancel(Order o) {
 		int orderID = o.getID();
 
 		out.println("CANCEL " + orderID);
+		return null;
 	}
 
 	public Order convert(Equity e, int size, String action) {
 		int orderID = nextID();
-		String symbol = e.getSymbol();
+		String symbol = e.getName();
 
 		out.println("CONVERT " + orderID + " " + symbol + " " + action + " " + size);
+		return null;
 	}
 
 	public static void main(String[] args) {
@@ -87,12 +95,12 @@ public class ClientV1 implements Client {
 
 			if (bondAction == Action.BUY) {
 				int numToBuy = 100 - book.getPosition("BOND");
-				OrderV1 order = new OrderV1("BOND", Action.BUY, book.getLowestSellPrice("BOND"), numToBuy);
+				buy(bondEquity, book.getLowestSellPrice("BOND"), numToBuy);
 			}
 
 			if (bondAction == Action.SELL) {
 				int numToSell = -100 + book.getPosition("BOND");
-				OrderV1 order = new OrderV1("BOND", Action.SELL, book.getHighestBuyPrice("BOND"), numToSell);
+				sell(bondEquity, book.getHighestBuyPrice("BOND"), numToSell);
 			}
 		}
 	}
