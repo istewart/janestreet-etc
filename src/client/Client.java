@@ -3,4 +3,5 @@ public interface Client {
 	public Order sell(Equity e, int amount);
 	public Order cancel(Order o);
 	public Order convert(Equity e);
+	public void shutdown();
 }
