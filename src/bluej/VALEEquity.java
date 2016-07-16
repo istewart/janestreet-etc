@@ -2,8 +2,8 @@ public class VALEEquity extends Equity {
     VALBZEquity valbzEquity;
     
     public VALEEquity(BookV1 book, VALBZEquity valbzEquity) {
-        valbzEquity = new VALBZEquity(book);
         super(book, "VALE");
+        valbzEquity = new VALBZEquity(book);
     }
     
 	public double getFairValue() {
