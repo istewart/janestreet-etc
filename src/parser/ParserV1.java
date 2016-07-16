@@ -59,8 +59,8 @@ public class ParserV1 implements Parser {
 		String symbol = split[1];
 		boolean isBuy = true;
 
-		List<Integer[]> buy = new ArrayList<>();
-		List<Integer[]> sell = new ArrayList<>();
+		List<Integer[]> buy = new ArrayList<Integer[]>();
+		List<Integer[]> sell = new ArrayList<Integer[]>();
 
 		for (int i = 2; i < split.length; i++) {
 			String curr = split[i];
