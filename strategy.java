@@ -23,9 +23,7 @@ public class BONDStrategy implements Strategy {
 }
 
 public class VALEStrategy implements Strategy {
-
-
 	public class VALEStrategy(VALEEquity valeEquity, VALBZ valbzEquity) {
-
+		double VALBZFairValue = valbzEquity.getFairValue();
 	}
 }
