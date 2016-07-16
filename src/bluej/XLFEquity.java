@@ -1,9 +1,18 @@
 public class XLFEquity extends Equity {
-    public XLFEquity(BookV1 book) {
+    BONDEquity bondEquity;
+    GSEquity gsEquity;
+    MSEquity msEquity;
+    WFCEquity wfcEquity;
+    
+    public XLFEquity(BookV1 book, BONDEquity bondEquity, GSEquity gsEquity, MSEquity msEquity, WFCEquity wfcEquity) {
+        bondEquity = new BONDEquity(book);
+        gsEquity = new GSEquity(book);
+        msEquity = new MSEquity(book);
+        wfcEquity = new WFCEquity(book);
         super(book, "XLF");
     }
     
-    public static double getFairValue() {
-    	return 3 * BONDEquity.getFairValue() + 2 * GSEquity.getFairValue() + 3 * MSEquity.getFairValue() + 2 * WFCEquity.getFairValue();
+    public double getFairValue() {
+    	return 3 * bondEquity.getFairValue() + 2 * gsEquity.getFairValue() + 3 * msEquity.getFairValue() + 2 * wfcEquity.getFairValue();
     }
 }

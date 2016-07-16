@@ -3,7 +3,7 @@ public class WFCEquity extends Equity {
         super(book, "WFC");
     }
     
-	public static double getFairValue() {
+	public double getFairValue() {
 		return 0.5 * (getLowestSellPrice() + getHighestBuyPrice());
 	}
 }

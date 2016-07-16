@@ -78,12 +78,12 @@ public class ClientV1 implements Client {
 		Parser p = new ParserV1(book);
 
 		Equity bondEquity = new BONDEquity(book);
-		Equity xlfEquity = new XLFEquity(book);
 		Equity gsEquity = new GSEquity(book);
 		Equity msEquity = new MSEquity(book);
 		Equity wfcEquity = new WFCEquity(book);
-		Equity valeEquity = new VALEEquity(book);
+        Equity xlfEquity = new XLFEquity(book, bondEquity, gsEquity, msEquity, wfcEquity);
 		Equity valbzEquity = new VALBZEquity(book);
+        Equity valeEquity = new VALEEquity(book, valbzEquity);
 
 		BONDStrategy bondStrategy = new BONDStrategy(bondEquity);
 		VALEStrategy valeStrategy = new VALEStrategy(valeEquity, valbzEquity);

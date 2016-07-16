@@ -1,5 +1,5 @@
 public abstract class Equity {
-    static BookV1 book;
+    BookV1 book;
     String name;
     
     public Equity(BookV1 book, String name) {
@@ -11,11 +11,11 @@ public abstract class Equity {
         return name;
     }
     
-    public static double getHighestBuyPrice() {
+    public double getHighestBuyPrice() {
         return book.getHighestBuyPrice(getName());
     }
 
-    public static double getLowestSellPrice() {
+    public double getLowestSellPrice() {
         return book.getLowestSellPrice(getName());
     }
 }

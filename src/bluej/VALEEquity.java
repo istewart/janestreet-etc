@@ -1,10 +1,13 @@
 public class VALEEquity extends Equity {
-    public VALEEquity(BookV1 book) {
+    VALBZEquity valbzEquity;
+    
+    public VALEEquity(BookV1 book, VALBZEquity valbzEquity) {
+        valbzEquity = new VALBZEquity(book);
         super(book, "VALE");
     }
     
-	public static double getFairValue() {
-		return VALBZEquity.getFairValue();
+	public double getFairValue() {
+		return valbzEquity.getFairValue();
 	}
 }
 

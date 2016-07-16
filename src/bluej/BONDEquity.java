@@ -3,7 +3,7 @@ public class BONDEquity extends Equity {
         super(book, "BOND");
     }
     
-    public static double getFairValue() {
+    public double getFairValue() {
         return 1000;
     }
 }

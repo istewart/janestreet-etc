@@ -3,7 +3,7 @@ public class GSEquity extends Equity {
         super(book, "GS");
     }
     
-	public static double getFairValue() {
+	public double getFairValue() {
 		return 0.5 * (getLowestSellPrice() + getHighestBuyPrice());
 	}
 }

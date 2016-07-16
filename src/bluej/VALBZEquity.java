@@ -3,7 +3,7 @@ public class VALBZEquity extends Equity {
         super(book, "VALBZ");
     }
     
-	public static double getFairValue() {
+	public double getFairValue() {
 		return 0.5 * (getLowestSellPrice() + getHighestBuyPrice());
 	}
 }
