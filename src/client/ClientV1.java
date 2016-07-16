@@ -85,9 +85,9 @@ public class ClientV1 implements Client {
 		Equity valeEquity = new VALEEquity(book);
 		Equity valbzEquity = new VALBZEquity(book);
 
-		BONDStrategy bondStrategy = new bondStrategy(bondEquity);
-		VALEStrategy valeStrategy = new valeStrategy(valeEquity, valbzEquity);
-		VALBZStrategy valbzStrategy = new valbzStrategy(valeEquity, valbzEquity);
+		BONDStrategy bondStrategy = new BONDStrategy(bondEquity);
+		VALEStrategy valeStrategy = new VALEStrategy(valeEquity, valbzEquity);
+		VALBZStrategy valbzStrategy = new VALBZStrategy(valeEquity, valbzEquity);
 
 		while (true) {
 			//update book
