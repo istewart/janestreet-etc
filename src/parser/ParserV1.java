@@ -4,7 +4,7 @@ import java.lang.Integer;
 
 public class ParserV1 implements Parser {
 	private final BufferedReader in;
-	private final Book book;
+	private final BookV1 book;
 
 	public ParserV1(BufferedReader in, BookV1 book) {
 		this.in = in;
