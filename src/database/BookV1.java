@@ -1,6 +1,7 @@
 import java.util.*;
 
 public class BookV1 implements Book {
+	private int cash = 0;
 	private Map<String, Integer> positions = new HashMap<String, Integer>();
 	private Map<String, List<int[]>> buy = new HashMap<String, List<int[]>>();
 	private Map<String, List<int[]>> sell = new HashMap<String, List<int[]>>();
@@ -29,6 +30,10 @@ public class BookV1 implements Book {
 
 	public int getPosition(String s) {
 		return positions.get(s);
+	}
+
+	public void  setCash(int cash) {
+		this.cash = cash;
 	}
 
 	public int getHighestBuyPrice(String s) {
