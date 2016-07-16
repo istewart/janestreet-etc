@@ -63,6 +63,37 @@ public class ClientV1 implements Client {
 	public static void main(String[] args) {
 		String address = args[0];
 		Client c = new ClientV1(address);
-		// TODO
+
+		//instantiate equitys & strategies
+		BookV1 book = new BookV1();
+		BONDEquity bondEquity = new BONDEquity(book);
+		XLFEquity xlfEquity = new XLFEquity(book);
+		GSEquity gsEquity = new GSEquity(book);
+		MSEquity msEquity = new MSEquity(book);
+		WFCEquity wfcEquity = new WFCEquity(book);
+		VALEEquity valeEquity = new VALEEquity(book);
+		VALBZEquity valbzEquity = new VALBZEquity(book);
+
+		BONDStrategy bondStrategy = new bondStrategy(bondEquity);
+		VALEStrategy valeStrategy = new valeStrategy(valeEquity, valbzEquity);
+		VALBZStrategy valbzStrategy = new valbzStrategy(valeEquity, valbzEquity);
+
+		while (true) {
+			//update book
+
+
+			// determine actions
+			Action bondAction = bondStrategy.determineAction();
+
+			if (bondAction == Action.BUY) {
+				int numToBuy = 100 - book.getPosition("BOND");
+				OrderV1 order = new OrderV1("BOND", Action.BUY, book.getLowestSellPrice("BOND"), numToBuy);
+			}
+
+			if (bondAction == Action.SELL) {
+				int numToSell = -100 + book.getPosition("BOND");
+				OrderV1 order = new OrderV1("BOND", Action.SELL, book.getHighestBuyPrice("BOND"), numToSell);
+			}
+		}
 	}
 }
