@@ -13,7 +13,7 @@ public class ClientV1 implements Client {
 		out = new PrintWriter(clientSocket.getOutputStream());
 		in = new BufferedReader(new InputStreamReader(s.getInputStream()));
 
-		out.println("HELLO " + TEAM_NAME)
+		out.println("HELLO " + TEAMNAME)
 	}
 
 	public void shutdown() {
