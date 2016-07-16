@@ -1,19 +1,23 @@
+import java.io.BufferedReader;
+import java.io.PrintWriter;
+import java.net.Socket;
+
 public class ClientV1 implements Client {
-	private static final int SERVER_PORT = 20000
-	private static final String TEAM_NAME "HOOLI";
+	private static final int SERVER_PORT = 20000;
+	private static final String TEAM_NAME = "HOOLI";
 
 	public final Socket s;
-	public final DataOutputStream out;
+	public final PrintWriter out;
 	public final BufferedReader in;
 
-	private static final int nextOrderId = 0;
+	private static int nextOrderId = 0;
 
-	public ClientV1(string address) {
+	public ClientV1(String address) {
 		s = new Socket(address, SERVER_PORT);
-		out = new PrintWriter(clientSocket.getOutputStream());
+		out = new PrintWriter(s.getOutputStream());
 		in = new BufferedReader(new InputStreamReader(s.getInputStream()));
 
-		out.println("HELLO " + TEAM_NAME)
+		out.println("HELLO " + TEAM_NAME);
 	}
 
 	public void shutdown() {
@@ -30,15 +34,15 @@ public class ClientV1 implements Client {
 	}
 
 	public Order buy(Equity e, int price, int size) {
-		int order_id = nextID()
-		String symbol = e.getSymbol()
+		int order_id = nextID();
+		String symbol = e.getSymbol();
 
 		out.println("ADD " + order_id + " " + symbol + " BUY " + price + " " + size);
 	}
 
 	public Order sell(Equity e, int price, int size) {
-		int orderID = nextID()
-		String symbol = e.getSymbol()
+		int orderID = nextID();
+		String symbol = e.getSymbol();
 
 		out.println("ADD " + orderID + " " + symbol + " SELL " + price + " " + size);
 	}
@@ -50,8 +54,8 @@ public class ClientV1 implements Client {
 	}
 
 	public Order convert(Equity e, int size, String action) {
-		int orderID = nextID()
-		String symbol = e.getSymbol()
+		int orderID = nextID();
+		String symbol = e.getSymbol();
 
 		out.println("CONVERT " + orderID + " " + symbol + " " + action + " " + size);
 	}
