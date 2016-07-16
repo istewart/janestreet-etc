@@ -1,10 +1,14 @@
 #BlueJ class context
-comment0.params=
-comment0.target=java.lang.String\ getName()
+comment0.params=id\ name\ action\ price\ amount
+comment0.target=OrderV1(int,\ java.lang.String,\ Action,\ double,\ int)
 comment1.params=
-comment1.target=Action\ getAction()
+comment1.target=int\ getId()
 comment2.params=
-comment2.target=double\ getPrice()
+comment2.target=java.lang.String\ getName()
 comment3.params=
-comment3.target=int\ getAmount()
-numComments=4
+comment3.target=Action\ getAction()
+comment4.params=
+comment4.target=double\ getPrice()
+comment5.params=
+comment5.target=int\ getAmount()
+numComments=6
