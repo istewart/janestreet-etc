@@ -59,8 +59,8 @@ public class ParserV1 implements Parser {
 		String symbol = split[1];
 		boolean isBuy = true;
 
-		List<int[]> buy = new ArrayList<>();
-		List<int[]> sell = new ArrayList<>();
+		List<Integer[]> buy = new ArrayList<>();
+		List<Integer[]> sell = new ArrayList<>();
 
 		for (int i = 2; i < split.length; i++) {
 			String curr = split[i];
@@ -75,10 +75,10 @@ public class ParserV1 implements Parser {
 				int size = Integer.parseInt(currSplit[1]);
 
 				if (isBuy) {
-					int[] pair = {price, size};
+					Integer[] pair = {price, size};
 					buy.add(pair);
 				} else {
-					int[] pair = {price, size};
+					Integer[] pair = {price, size};
 					sell.add(pair);
 				}
 			}

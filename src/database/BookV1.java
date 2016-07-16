@@ -3,8 +3,8 @@ import java.util.*;
 public class BookV1 implements Book {
 	private int cash = 0;
 	private Map<String, Integer> positions = new HashMap<String, Integer>();
-	private Map<String, List<int[]>> buy = new HashMap<String, List<int[]>>();
-	private Map<String, List<int[]>> sell = new HashMap<String, List<int[]>>();
+	private Map<String, List<Integer[]>> buy = new HashMap<String, List<Integer[]>>();
+	private Map<String, List<Integer[]>> sell = new HashMap<String, List<Integer[]>>();
 
 	public BookV1() {
 		positions.put("BOND", 0);
@@ -20,11 +20,11 @@ public class BookV1 implements Book {
 		positions.put(s, amount);
 	}
 
-	public void updateBuy(String s, List<int[]> newBuy) {
+	public void updateBuy(String s, List<Integer[]> newBuy) {
 		buy.put(s, newBuy);
 	}
 
-	public void updateSell(String s, List<int[]> newSell) {
+	public void updateSell(String s, List<Integer[]> newSell) {
 		sell.put(s, newSell);
 	}
 
