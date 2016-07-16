@@ -13,7 +13,7 @@ public class ClientV1 implements Client {
 
 	private static int nextOrderId = 0;
 
-	public ClientV1(String address) {
+	public ClientV1(String address) throws Exception {
 		s = new Socket(address, SERVER_PORT);
 		out = new PrintWriter(s.getOutputStream());
 		in = new BufferedReader(new InputStreamReader(s.getInputStream()));
@@ -21,7 +21,7 @@ public class ClientV1 implements Client {
 		out.println("HELLO " + TEAM_NAME);
 	}
 
-	public void shutdown() {
+	public void shutdown() throws Exception {
 		s.close();
 		out.close();
 		in.close();
@@ -55,7 +55,7 @@ public class ClientV1 implements Client {
 	}
 	
 	public Order cancel(Order o) {
-		int orderID = o.getID();
+		int orderID = o.getId();
 
 		out.println("CANCEL " + orderID);
 		return null;
@@ -69,7 +69,7 @@ public class ClientV1 implements Client {
 		return null;
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		String address = args[0];
 		ClientV1 c = new ClientV1(address);
 
@@ -77,13 +77,13 @@ public class ClientV1 implements Client {
 		BookV1 book = new BookV1();
 		Parser p = new ParserV1(book);
 
-		Equity bondEquity = new BONDEquity(book);
-		Equity gsEquity = new GSEquity(book);
-		Equity msEquity = new MSEquity(book);
-		Equity wfcEquity = new WFCEquity(book);
-        Equity xlfEquity = new XLFEquity(book, bondEquity, gsEquity, msEquity, wfcEquity);
-		Equity valbzEquity = new VALBZEquity(book);
-        Equity valeEquity = new VALEEquity(book, valbzEquity);
+		BONDEquity bondEquity = new BONDEquity(book);
+		GSEquity gsEquity = new GSEquity(book);
+		MSEquity msEquity = new MSEquity(book);
+		WFCEquity wfcEquity = new WFCEquity(book);
+        XLFEquity xlfEquity = new XLFEquity(book, bondEquity, gsEquity, msEquity, wfcEquity);
+		VALBZEquity valbzEquity = new VALBZEquity(book);
+        VALEEquity valeEquity = new VALEEquity(book, valbzEquity);
 
 		BONDStrategy bondStrategy = new BONDStrategy(bondEquity);
 		VALEStrategy valeStrategy = new VALEStrategy(valeEquity, valbzEquity);
