@@ -55,17 +55,10 @@ public class ClientV1 implements Client {
 
 		out.println("CONVERT " + orderID + " " + symbol + " " + action + " " + size);
 	}
+
+	public static void main(String[] args) {
+		String address = args[0];
+		Client c = new ClientV1(address);
+		// TODO
+	}
 }
-
-		// sentence = inFromUser.readLine();
-		// outToServer.writeBytes(sentence + '\n');
-		// modifiedSentence = inFromServer.readLine();
-		// System.out.println("FROM SERVER: " + modifiedSentence);
-
-// Socket skt = new Socket("test-exch-teamname", 20000);
-//             BufferedReader from_exchange = new BufferedReader(new InputStreamReader(skt.getInputStream()));
-//             PrintWriter to_exchange = new PrintWriter(skt.getOutputStream(), true);
-
-//             to_exchange.println("HELLO TEAMNAME");
-//             String reply = from_exchange.readLine().trim();
-//             System.err.printf("The exchange replied: %s\n", reply);
