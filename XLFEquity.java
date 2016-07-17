@@ -6,10 +6,10 @@ public class XLFEquity extends Equity {
     
     public XLFEquity(BookV1 book, BONDEquity bondEquity, GSEquity gsEquity, MSEquity msEquity, WFCEquity wfcEquity) {
         super(book, "XLF");
-        bondEquity = new BONDEquity(book);
-        gsEquity = new GSEquity(book);
-        msEquity = new MSEquity(book);
-        wfcEquity = new WFCEquity(book);
+        bondEquity = this.bondEquity;
+        gsEquity = this.gsEquity;
+        msEquity = this.msEquity;
+        wfcEquity = this.wfcEquity;
     }
     
     public double getFairValue() {
