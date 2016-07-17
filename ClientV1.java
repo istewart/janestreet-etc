@@ -186,28 +186,27 @@ public class ClientV1 implements Client {
 				//BOND
 
 				if (bondAction == Action.BUY) {
-					int numToBuy = 100 - book.getPosition("BOND");
+					int numToBuy = 100 - book.getPosition("BOND") - book.getOurBuys().get("BOND");
 					int orderID = c.buy(bondEquity, book.getLowestSellPrice("BOND"), numToBuy);
 					book.add(orderID, "BOND", "BUY", book.getLowestSellPrice("BOND"), numToBuy);
 				}
 
 				if (bondAction == Action.SELL) {
-					int numToSell = 100 + book.getPosition("BOND");
+					int numToSell = 100 + book.getPosition("BOND") - book.getOurSells().get("SELLS");
 					int orderID = c.sell(bondEquity, book.getHighestBuyPrice("BOND"), numToSell);
 					book.add(orderID, "BOND", "SELL", book.getHighestBuyPrice("BOND"), numToSell);
 				}
                 
-                /**
 				//VALE
 
 				if (valeAction == Action.BUY) {
-					int numToBuy = 10 - book.getPosition("VALE");
+					int numToBuy = 10 - book.getPosition("VALE") - book.getOurBuys().get("VALE");
 					int orderID = c.buy(valeEquity, book.getLowestSellPrice("VALE"), numToBuy);
 					book.add(orderID, "VALE", "BUY", book.getLowestSellPrice("VALE"), numToBuy);
 				}
 
 				if (valeAction == Action.SELL) {
-					int numToSell = 10 + book.getPosition("VALE");
+					int numToSell = 10 + book.getPosition("VALE") - book.getOurSells().get("VALE");
 					int orderID = c.sell(valeEquity, book.getHighestBuyPrice("VALE"), numToSell);
 					book.add(orderID, "VALE", "SELL", book.getHighestBuyPrice("VALE"), numToSell);
 				}
@@ -220,21 +219,21 @@ public class ClientV1 implements Client {
 				//VALBZ
 
 				if (valbzAction == Action.BUY) {
-					int numToBuy = 10 - book.getPosition("VALBZ");
+					int numToBuy = 10 - book.getPosition("VALBZ") - book.getOurBuys().get("VALBZ");
 					int orderID = c.buy(valbzEquity, book.getLowestSellPrice("VALBZ"), numToBuy);
 					book.add(orderID, "VALBZ", "BUY", book.getLowestSellPrice("VALBZ"), numToBuy);
 				}
 
 				if (valbzAction == Action.SELL) {
-					int numToSell = 10 + book.getPosition("VALBZ");
+					int numToSell = 10 + book.getPosition("VALBZ") - book.getOurSells().get("SELL");
 					int orderID = c.sell(valbzEquity, book.getHighestBuyPrice("VALBZ"), numToSell);
 					book.add(orderID, "VALBZ", "SELL", book.getHighestBuyPrice("VALBZ"), numToSell);
 				}
-
+                
 				if (valbzAction == Action.CONVERT) {
 					int numToBUY = 10 + book.getPosition("VALBZ");
-					int orderID = c.convert(valbzEquity, numToBUY, "BUY");				
-				} */
+					int orderID = c.convert(valbzEquity, numToBUY, "BUY");			
+                }
 
 				System.out.println("Cash on hand: " + book.getCash());
                 System.out.println("Value of portfolio: " + calculatePortfolioValue(book, bondEquity, gsEquity, msEquity, wfcEquity, xlfEquity, valbzEquity, valeEquity));
