@@ -4,6 +4,8 @@ import java.lang.*;
 public class BookV1 implements Book {
 	private int cash = 0;
 	private Map<String, Integer> positions = new HashMap<String, Integer>();
+    private Map<String, Integer> ourSells = new HashMap<String, Integer>();
+    private Map<String, Integer> ourBuys = new HashMap<String, Integer>();
 	private Map<String, List<Integer[]>> buy = new HashMap<String, List<Integer[]>>();
 	private Map<String, List<Integer[]>> sell = new HashMap<String, List<Integer[]>>();
 
@@ -32,6 +34,10 @@ public class BookV1 implements Book {
 	public int getPosition(String s) {
 		return positions.get(s);
 	}
+    
+    public Map<String, Integer> getPositions() {
+        return positions;
+    }
 
 	public void setCash(int cash) {
 		this.cash = cash;
