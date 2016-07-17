@@ -22,13 +22,13 @@ public class BookV1 implements Book {
     
     public void fill(int orderId, String s, String type, int price, int size) {
         if (type.equals("BUY")) {
-            if (ourBuys.hasKey(s)) {
+            if (ourBuys.containsKey(s)) {
                 ourBuys.put(s, ourBuys.get(s, 0) - size);
             } else {
                 ourBuys.put(s, -size);
             }
             
-            if (positions.hasKey(s)) {
+            if (positions.containsKey(s)) {
                 positions.put(s, positions.get(s, 0) + size);
             } else {
                 positions.put(s, size);
@@ -36,7 +36,7 @@ public class BookV1 implements Book {
             
             cash -= price * size;
         } else if (type.equals("SELL")) {
-            if (ourSells.hasKey(s)) {
+            if (ourSells.containsKey(s)) {
                 ourSells.put(s, ourSells.get(s, 0) - size);
             } else {
                 ourSells.put(s, -size);
@@ -52,19 +52,19 @@ public class BookV1 implements Book {
         int size = order.getAmount();
         
         if (type.equals("BUY")) {
-            if (ourBuys.hasKey(s)) {
+            if (ourBuys.containsKey(s)) {
                 ourBuys.put(s, ourBuys.get(s, 0) + size);
             } else {
                 ourBuys.put(s, size);
             }
         } else if (type.equals("SELL")) {
-            if (ourSells.hasKey(s)) {
+            if (ourSells.containsKey(s)) {
                 ourSells.put(s, ourSells.get(s, 0) + size);
             } else {
                 ourSells.put(s, size);
             }
             
-            if (positions.hasKey(s)) {
+            if (positions.containsKey(s)) {
                 positions.put(s, positions.get(s, 0) - size);
             } else {
                 positions.put(s, -size);
