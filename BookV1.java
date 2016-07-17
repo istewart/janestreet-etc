@@ -41,6 +41,7 @@ public class BookV1 implements Book {
 	}
 
 	public int getLowestSellPrice(String s) {
+        System.out.println(s);
 		return sell.get(s).get(0)[0];
 	}
 }
