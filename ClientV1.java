@@ -126,6 +126,8 @@ public class ClientV1 implements Client {
 				Action valeAction = valeStrategy.determineAction();
 				Action valbzAction  = valbzStrategy.determineAction(); 
 
+				//BOND
+
 				if (bondAction == Action.BUY) {
 					int numToBuy = 100 - book.getPosition("BOND");
 					int orderID = c.buy(bondEquity, book.getLowestSellPrice("BOND"), numToBuy);
@@ -138,9 +140,37 @@ public class ClientV1 implements Client {
 					book.add(orderID, "BOND", "SELL", book.getHighestBuyPrice("BOND"), numToSell);
 				}
 
+				//VALE
+
+				if (valeAction == Action.BUY) {
+					int numToBuy = 10 - book.getPosition("VALE");
+					int orderID = c.buy(valeEquity, book.getLowestSellPrice("VALE"), numToBuy);
+					book.add(orderID, "VALE", "BUY", book.getLowestSellPrice("VALE"), numToBuy);
+				}
+
+				if (valeAction == Action.SELL) {
+					int numToSell = -10 + book.getPosition("VALE");
+					int orderID = c.sell(valeEquity, book.getHighestBuyPrice("VALE"), numToSell);
+					book.add(orderID, "VALE", "SELL", book.getHighestBuyPrice("VALE"), numToSell);
+				}
+
 				if (valeAction == Action.CONVERT) {
 					int numToBuy = 10 - book.getPosition("VALE");
 					int orderID = c.convert(valeEquity, numToBuy, "BUY");
+				}
+
+				//VALBZ
+
+				if (valbzAction == Action.BUY) {
+					int numToBuy = 10 - book.getPosition("VALBZ");
+					int orderID = c.buy(valbzEquity, book.getLowestSellPrice("VALBZ"), numToBuy);
+					book.add(orderID, "VALBZ", "BUY", book.getLowestSellPrice("VALBZ"), numToBuy);
+				}
+
+				if (valbzAction == Action.SELL) {
+					int numToSell = -10 + book.getPosition("VALBZ");
+					int orderID = c.sell(valbzEquity, book.getHighestBuyPrice("VALBZ"), numToSell);
+					book.add(orderID, "VALBZ", "SELL", book.getHighestBuyPrice("VALBZ"), numToSell);
 				}
 
 				if (valbzAction == Action.CONVERT) {
