@@ -79,6 +79,62 @@ public class ClientV1 implements Client {
 		out.println("CONVERT " + orderID + " " + symbol + " " + action + " " + size);
 		return orderID;
 	}
+    
+    public int calculatePortfolioValue(BookV1 book, BONDEquity bondEquity, GSEquity gsEquity, MSEquity msEquity, WFCEquity wfcEquity, XLFEquity xlfEquity, VALBZEquity valbzEquity, VALEEquity valeEquity) {
+        int portfolioValue = 0;
+        Map<String, Integer> ourSells = book.getOurSells();
+        Map<String, Integer> positions = book.getPositions();
+        
+        for (String s : ourSells.keySet()) {
+            if (s.equals("BOND")) {
+                portfolioValue += bondEquity.getFairValue() * ourSells.get(s);
+            }
+            if (s.equals("GS")) {
+                portfolioValue += gsEquity.getFairValue() * ourSells.get(s);
+            }
+            if (s.equals("MS")) {
+                portfolioValue += msEquity.getFairValue() * ourSells.get(s);
+            }
+            if (s.equals("WFC")) {
+                portfolioValue += wfcEquity.getFairValue() * ourSells.get(s);
+            }
+            if (s.equals("XLF")) {
+                portfolioValue += xlfEquity.getFairValue() * ourSells.get(s);
+            }
+            if (s.equals("VALBZ")) {
+                portfolioValue += valbzEquity.getFairValue() * ourSells.get(s);
+            }
+            if (s.equals("VALE")) {
+                portfolioValue += valeEquity.getFairValue() * ourSells.get(s);
+            }
+        }
+        
+        for (String s : positions.keySet()) {
+            if (s.equals("BOND")) {
+                portfolioValue += bondEquity.getFairValue() * positions.get(s);
+            }
+            if (s.equals("GS")) {
+                portfolioValue += gsEquity.getFairValue() * positions.get(s);
+            }
+            if (s.equals("MS")) {
+                portfolioValue += msEquity.getFairValue() * positions.get(s);
+            }
+            if (s.equals("WFC")) {
+                portfolioValue += wfcEquity.getFairValue() * positions.get(s);
+            }
+            if (s.equals("XLF")) {
+                portfolioValue += xlfEquity.getFairValue() * positions.get(s);
+            }
+            if (s.equals("VALBZ")) {
+                portfolioValue += valbzEquity.getFairValue() * positions.get(s);
+            }
+            if (s.equals("VALE")) {
+                portfolioValue += valeEquity.getFairValue() * positions.get(s);
+            }
+        }
+        
+        return portfolioValue;
+    }
 
 	public static void main(String[] args) {
 	    try {
@@ -180,6 +236,7 @@ public class ClientV1 implements Client {
 
 				System.out.println("Done strategizing.");
 				System.out.println("Cash on hand: " + book.getCash());
+                System.out.println("Value of portfolio: " + calculatePortfolioValue(book, bondEquity, gsEquity, msEquity, wfcEquity, xlfEquity, valbzEquity, valeEquity));
 			}
         } catch (Exception e) {
 			e.printStackTrace();

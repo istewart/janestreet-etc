@@ -68,6 +68,14 @@ public class BookV1 implements Book {
     public Map<String, Integer> getPositions() {
         return positions;
     }
+    
+    public Map<String, Integer> getOurSells() {
+        return ourSells;
+    }
+    
+    public Map<String, Integer> getOurBuys() {
+        return ourBuys;
+    }
 
 	public void setCash(int cash) {
 		this.cash = cash;
