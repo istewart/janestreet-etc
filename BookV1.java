@@ -19,10 +19,16 @@ public class BookV1 implements Book {
 		positions.put("XLF", 0);
 	}
     
-    public void fill(int orderId, String s, boolean isBuy, int price, int size) {
-        if isBuy {
+    public void fill(int orderId, String s, String type, int price, int size) {
+        if (type.equals("BUY")) {
             ourBuys.put(s, ourBuys.get(s) - size);
-        } else // sell
+            positions.put(s, positions.get(s) + size);
+            cash -= price * size;
+        } else if (type.equals("SELL")) {
+            ourSells.put(s, ourSells.get(s) - size);
+            positions.put(s, positions.get(s) - size);
+            cash += price * size;
+        }
     }
 
 	public void update(String s, int amount) {
