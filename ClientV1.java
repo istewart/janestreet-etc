@@ -179,6 +179,10 @@ public class ClientV1 implements Client {
 				Action valeAction = valeStrategy.determineAction();
 				Action valbzAction  = valbzStrategy.determineAction(); 
 
+                System.out.println("Bond Action: " + bondAction);
+                System.out.println("Vale Action: " + valeAction);
+                System.out.println("Valbz Action: " + valbzAction);
+
 				//BOND
 
 				if (bondAction == Action.BUY) {
