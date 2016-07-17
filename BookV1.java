@@ -8,6 +8,7 @@ public class BookV1 implements Book {
     private Map<String, Integer> ourBuys = new HashMap<String, Integer>();
 	private Map<String, List<Integer[]>> buy = new HashMap<String, List<Integer[]>>();
 	private Map<String, List<Integer[]>> sell = new HashMap<String, List<Integer[]>>();
+    private Map<Integer, OrderV1> orders = new HashMap<Integer, OrderV1>() // order IDs as keys
 
 	public BookV1() {
 		positions.put("BOND", 0);
@@ -21,14 +22,31 @@ public class BookV1 implements Book {
     
     public void fill(int orderId, String s, String type, int price, int size) {
         if (type.equals("BUY")) {
-            ourBuys.put(s, ourBuys.get(s) - size);
-            positions.put(s, positions.get(s) + size);
+            ourBuys.put(s, ourBuys.getOrDefault(s, 0) - size);
+            positions.put(s, positions.getOrDefault(s, 0) + size);
             cash -= price * size;
         } else if (type.equals("SELL")) {
-            ourSells.put(s, ourSells.get(s) - size);
-            positions.put(s, positions.get(s) - size);
+            ourSells.put(s, ourSells.getOrDefault(s, 0) - size);
             cash += price * size;
         }
+    }
+    
+    public void ack(int orderId) {
+        OrderV1 order = orders.get(orderId);
+        String s = order.getName();
+        int size = order.getSize();
+        
+        if (type.equals("BUY")) {
+            ourBuys.put(s, ourBuys.getOrDefault(s, 0) + size);
+        } else if (type.equals("SELL")) {
+            ourSells.put(s, ourSells.getOrDefault(s, 0) + size);
+            positions.put(s, positions.getOrDefault(s, 0) - size);
+        }
+    }
+    
+    public void reject(int orderId, String reason) {
+        System.out.println("Order " + orderId + " rejected for reason: " + reason);
+        orders.remove(orderId);
     }
 
 	public void update(String s, int amount) {
