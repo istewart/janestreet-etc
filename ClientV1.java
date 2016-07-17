@@ -123,6 +123,8 @@ public class ClientV1 implements Client {
 
 				// determine actions
 				Action bondAction = bondStrategy.determineAction();
+				Action valeAction = valeStrategy.determineAction();
+				Action valbzAction  = valbzStrategy.determineAction(); 
 
 				if (bondAction == Action.BUY) {
 					int numToBuy = 100 - book.getPosition("BOND");
@@ -134,6 +136,16 @@ public class ClientV1 implements Client {
 					int numToSell = -100 + book.getPosition("BOND");
 					int orderID = c.sell(bondEquity, book.getHighestBuyPrice("BOND"), numToSell);
 					book.add(orderID, "BOND", "SELL", book.getHighestBuyPrice("BOND"), numToSell);
+				}
+
+				if (valeAction == Action.CONVERT) {
+					int numToBuy = 10 - book.getPosition("VALE");
+					int orderID = c.convert(valeEquity, numToBuy, "BUY");
+				}
+
+				if (valbzAction == Action.CONVERT) {
+					int numToBUY = 10 - book.getPosition("VALBZ");
+					int orderID = c.convert(valbzEquity, numToBUY, "BUY");				
 				}
 
 				System.out.println("Done strategizing.");
