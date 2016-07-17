@@ -32,7 +32,7 @@ public class BookV1 implements Book {
 		return positions.get(s);
 	}
 
-	public void  setCash(int cash) {
+	public void setCash(int cash) {
 		this.cash = cash;
 	}
 

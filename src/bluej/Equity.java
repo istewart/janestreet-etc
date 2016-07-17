@@ -7,7 +7,7 @@ public abstract class Equity {
         this.name = name;
     }
     
-    public static String getName() {
+    public String getName() {
         return name;
     }
     
