@@ -86,62 +86,64 @@ public class ClientV1 implements Client {
 
 	public static void main(String[] args) {
 	    try {
-		String address = args[0];
-		ClientV1 c = new ClientV1(address);
+			String address = args[0];
+			ClientV1 c = new ClientV1(address);
 
-		//instantiate equitys & strategies
-		BookV1 book = new BookV1();
-		Parser p = new ParserV1(book);
+			//instantiate equitys & strategies
+			BookV1 book = new BookV1();
+			Parser p = new ParserV1(book);
 
-		System.out.println("Book and parser initialized.");
+			System.out.println("Book and parser initialized.");
 
-		BONDEquity bondEquity = new BONDEquity(book);
-		GSEquity gsEquity = new GSEquity(book);
-		MSEquity msEquity = new MSEquity(book);
-		WFCEquity wfcEquity = new WFCEquity(book);
-        	XLFEquity xlfEquity = new XLFEquity(book, bondEquity, gsEquity, msEquity, wfcEquity);
-		VALBZEquity valbzEquity = new VALBZEquity(book);
-        	VALEEquity valeEquity = new VALEEquity(book, valbzEquity);
+			BONDEquity bondEquity = new BONDEquity(book);
+			GSEquity gsEquity = new GSEquity(book);
+			MSEquity msEquity = new MSEquity(book);
+			WFCEquity wfcEquity = new WFCEquity(book);
+			XLFEquity xlfEquity = new XLFEquity(book, bondEquity, gsEquity, msEquity, wfcEquity);
+			VALBZEquity valbzEquity = new VALBZEquity(book);
+			VALEEquity valeEquity = new VALEEquity(book, valbzEquity);
 
-		System.out.println("Equities initialized.");
+			System.out.println("Equities initialized.");
 
-		BONDStrategy bondStrategy = new BONDStrategy(bondEquity);
-		VALEStrategy valeStrategy = new VALEStrategy(valeEquity, valbzEquity);
-		VALBZStrategy valbzStrategy = new VALBZStrategy(valeEquity, valbzEquity);
+			BONDStrategy bondStrategy = new BONDStrategy(bondEquity);
+			VALEStrategy valeStrategy = new VALEStrategy(valeEquity, valbzEquity);
+			VALBZStrategy valbzStrategy = new VALBZStrategy(valeEquity, valbzEquity);
 
-		System.out.println("Strategies initialized.");
+			System.out.println("Strategies initialized.");
 
-		while (true) {
-			System.out.println("Looping.");
+			while (true) {
+				System.out.println("Looping.");
 
-			//update book
-			String s;
-			while ((s = c.in.readLine()) != null) {
-				System.out.println("Parsing: " + s);
+				//update book
+				String s = c.in.readLine();
+				if (s == null) {
+					System.out.println("Server closed.");
+					return;
+				}
+
 				p.parse(s);
+
+				System.out.println("Done parsing.");
+
+				// determine actions
+				Action bondAction = bondStrategy.determineAction();
+
+				if (bondAction == Action.BUY) {
+					int numToBuy = 100 - book.getPosition("BOND");
+					c.buy(bondEquity, book.getLowestSellPrice("BOND"), numToBuy);
+				}
+
+				if (bondAction == Action.SELL) {
+					int numToSell = -100 + book.getPosition("BOND");
+					c.sell(bondEquity, book.getHighestBuyPrice("BOND"), numToSell);
+				}
+
+				System.out.println("Done strategizing.");
 			}
-
-			System.out.println("Done parsing.");
-
-			// determine actions
-			Action bondAction = bondStrategy.determineAction();
-
-			if (bondAction == Action.BUY) {
-				int numToBuy = 100 - book.getPosition("BOND");
-				c.buy(bondEquity, book.getLowestSellPrice("BOND"), numToBuy);
-			}
-
-			if (bondAction == Action.SELL) {
-				int numToSell = -100 + book.getPosition("BOND");
-				c.sell(bondEquity, book.getHighestBuyPrice("BOND"), numToSell);
-			}
-
-			System.out.println("Done strategizing.");
-		}
-            } catch (Exception e) {
-		e.printStackTrace();
-		System.out.println(e.getMessage());
-		return;
-            }
+        } catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+			return;
+        }
 	}
 }
