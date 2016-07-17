@@ -1,4 +1,5 @@
 import java.util.*;
+import java.lang.*;
 
 public class BookV1 implements Book {
 	private int cash = 0;
@@ -37,11 +38,18 @@ public class BookV1 implements Book {
 	}
 
 	public int getHighestBuyPrice(String s) {
+        if (buy.get(s) == null) {
+            return Integer.MIN_VALUE;
+        }
+        
 		return buy.get(s).get(0)[0];
 	}
 
 	public int getLowestSellPrice(String s) {
-        System.out.println(s);
+        if (sell.get(s) == null) {
+            return Integer.MAX_VALUE;
+        }
+        
 		return sell.get(s).get(0)[0];
 	}
 }
