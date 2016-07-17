@@ -38,7 +38,7 @@ public class BookV1 implements Book {
 	}
 
 	public int getHighestBuyPrice(String s) {
-        if (buy.get(s) == null) {
+        if (buy.get(s) == null || buy.get(s).size() == 0) {
             return Integer.MIN_VALUE;
         }
         
@@ -46,7 +46,7 @@ public class BookV1 implements Book {
 	}
 
 	public int getLowestSellPrice(String s) {
-        if (sell.get(s) == null) {
+        if (sell.get(s) == null || sell.get(s).size() == 0) {
             return Integer.MAX_VALUE;
         }
         
