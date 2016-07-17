@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.*;
 
 public class ClientV1 implements Client {
 	private static final int SERVER_PORT = 20000;
@@ -236,7 +237,7 @@ public class ClientV1 implements Client {
 
 				System.out.println("Done strategizing.");
 				System.out.println("Cash on hand: " + book.getCash());
-                System.out.println("Value of portfolio: " + calculatePortfolioValue(book, bondEquity, gsEquity, msEquity, wfcEquity, xlfEquity, valbzEquity, valeEquity));
+                System.out.println("Value of portfolio: " + this.calculatePortfolioValue(book, bondEquity, gsEquity, msEquity, wfcEquity, xlfEquity, valbzEquity, valeEquity));
 			}
         } catch (Exception e) {
 			e.printStackTrace();

@@ -34,7 +34,7 @@ public class BookV1 implements Book {
     public void ack(int orderId) {
         OrderV1 order = orders.get(orderId);
         String s = order.getName();
-        int size = order.getSize();
+        int size = order.getAmount();
         
         if (type.equals("BUY")) {
             ourBuys.put(s, ourBuys.getOrDefault(s, 0) + size);
