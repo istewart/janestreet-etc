@@ -21,14 +21,26 @@ public class BookV1 implements Book {
     
     public void fill(int orderId, String s, String type, int price, int size) {
         if (type.equals("BUY")) {
-            ourBuys.put(s, ourBuys.get(s) - size);
-            positions.put(s, positions.get(s) + size);
+            ourBuys.put(s, ourBuys.getOrDefault(s, 0) - size);
+            positions.put(s, positions.getOrDefault(s, 0) + size);
             cash -= price * size;
         } else if (type.equals("SELL")) {
-            ourSells.put(s, ourSells.get(s) - size);
-            positions.put(s, positions.get(s) - size);
+            ourSells.put(s, ourSells.getOrDefault(s, 0) - size);
             cash += price * size;
         }
+    }
+    
+    public void add(int orderId, String symbol, String type, int price, int size) {
+        if (type.equals("BUY")) {
+            ourBuys.put(s, ourBuys.getOrDefault(s, 0) + size);
+        } else if (type.equals("SELL")) {
+            ourSells.put(s, ourSells.getOrDefault(s, 0) + size);
+            positions.put(s, positions.getOrDefault(s, 0) - size);
+        }
+    }
+    
+    public void reject(int orderId, String reason) {
+        
     }
 
 	public void update(String s, int amount) {
