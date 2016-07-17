@@ -196,7 +196,8 @@ public class ClientV1 implements Client {
 					int orderID = c.sell(bondEquity, book.getHighestBuyPrice("BOND"), numToSell);
 					book.add(orderID, "BOND", "SELL", book.getHighestBuyPrice("BOND"), numToSell);
 				}
-
+                
+                /**
 				//VALE
 
 				if (valeAction == Action.BUY) {
@@ -233,7 +234,7 @@ public class ClientV1 implements Client {
 				if (valbzAction == Action.CONVERT) {
 					int numToBUY = 10 + book.getPosition("VALBZ");
 					int orderID = c.convert(valbzEquity, numToBUY, "BUY");				
-				}
+				} */
 
 				System.out.println("Cash on hand: " + book.getCash());
                 System.out.println("Value of portfolio: " + calculatePortfolioValue(book, bondEquity, gsEquity, msEquity, wfcEquity, xlfEquity, valbzEquity, valeEquity));
