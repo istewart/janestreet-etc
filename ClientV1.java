@@ -7,18 +7,33 @@ public class ClientV1 implements Client {
 	private static final int SERVER_PORT = 20000;
 	private static final String TEAM_NAME = "HOOLI";
 
-	public final Socket s;
-	public final PrintWriter out;
-	public final BufferedReader in;
+	public Socket s;
+	public PrintWriter out;
+	public BufferedReader in;
 
 	private static int nextOrderId = 0;
 
 	public ClientV1(String address) throws Exception {
-		s = new Socket(address, SERVER_PORT);
-		out = new PrintWriter(s.getOutputStream());
-		in = new BufferedReader(new InputStreamReader(s.getInputStream()));
+		System.out.println("Attempting to connect to " + address);
+
+		s = null;
+		out = null;
+		in = null;
+
+		try {
+			s = new Socket(address, SERVER_PORT);
+			out = new PrintWriter(s.getOutputStream());
+			in = new BufferedReader(new InputStreamReader(s.getInputStream()));
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+			return;
+		}
 
 		out.println("HELLO " + TEAM_NAME);
+		out.flush();
+
+		System.out.println("Handshake sent!");
 	}
 
 	public void shutdown() throws Exception {
@@ -69,7 +84,8 @@ public class ClientV1 implements Client {
 		return null;
 	}
 
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) {
+	    try {
 		String address = args[0];
 		ClientV1 c = new ClientV1(address);
 
@@ -77,24 +93,35 @@ public class ClientV1 implements Client {
 		BookV1 book = new BookV1();
 		Parser p = new ParserV1(book);
 
+		System.out.println("Book and parser initialized.");
+
 		BONDEquity bondEquity = new BONDEquity(book);
 		GSEquity gsEquity = new GSEquity(book);
 		MSEquity msEquity = new MSEquity(book);
 		WFCEquity wfcEquity = new WFCEquity(book);
-        XLFEquity xlfEquity = new XLFEquity(book, bondEquity, gsEquity, msEquity, wfcEquity);
+        	XLFEquity xlfEquity = new XLFEquity(book, bondEquity, gsEquity, msEquity, wfcEquity);
 		VALBZEquity valbzEquity = new VALBZEquity(book);
-        VALEEquity valeEquity = new VALEEquity(book, valbzEquity);
+        	VALEEquity valeEquity = new VALEEquity(book, valbzEquity);
+
+		System.out.println("Equities initialized.");
 
 		BONDStrategy bondStrategy = new BONDStrategy(bondEquity);
 		VALEStrategy valeStrategy = new VALEStrategy(valeEquity, valbzEquity);
 		VALBZStrategy valbzStrategy = new VALBZStrategy(valeEquity, valbzEquity);
 
+		System.out.println("Strategies initialized.");
+
 		while (true) {
+			System.out.println("Looping.");
+
 			//update book
 			String s;
 			while ((s = c.in.readLine()) != null) {
+				System.out.println("Parsing: " + s);
 				p.parse(s);
-			}	
+			}
+
+			System.out.println("Done parsing.");
 
 			// determine actions
 			Action bondAction = bondStrategy.determineAction();
@@ -108,6 +135,13 @@ public class ClientV1 implements Client {
 				int numToSell = -100 + book.getPosition("BOND");
 				c.sell(bondEquity, book.getHighestBuyPrice("BOND"), numToSell);
 			}
+
+			System.out.println("Done strategizing.");
 		}
+            } catch (Exception e) {
+		e.printStackTrace();
+		System.out.println(e.getMessage());
+		return;
+            }
 	}
 }

@@ -1,6 +1,0 @@
-#BlueJ class context
-comment0.params=valeEquity\ valbzEquity
-comment0.target=VALEStrategy(VALEEquity,\ VALBZEquity)
-comment1.params=
-comment1.target=Action\ determineAction()
-numComments=2

@@ -27,7 +27,7 @@ public class ParserV1 implements Parser {
 	}
 
 	public void parseHello(String[] split) {
-		int cash = Integer.parseInt(split[0]);
+		int cash = Integer.parseInt(split[1]);
 		this.book.setCash(cash);
 
 		for (int i = 2; i < split.length; i++) {
