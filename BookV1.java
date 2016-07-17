@@ -50,7 +50,7 @@ public class BookV1 implements Book {
         OrderV1 order = orders.get(orderId);
         String s = order.getName();
         int size = order.getAmount();
-        String type = order.getType();
+        String type = order.getAction();
         
         if (type.equals("BUY")) {
             if (ourBuys.containsKey(s)) {
@@ -76,6 +76,10 @@ public class BookV1 implements Book {
     public void reject(int orderId, String reason) {
         System.out.println("Order " + orderId + " rejected for reason: " + reason);
         orders.remove(orderId);
+    }
+    
+    public void out(int orderId) {
+        System.out.println("Order " + orderId + " out");
     }
 
 	public void update(String s, int amount) {
