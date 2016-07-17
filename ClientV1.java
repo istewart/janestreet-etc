@@ -81,7 +81,7 @@ public class ClientV1 implements Client {
 		return orderID;
 	}
     
-    public int calculatePortfolioValue(BookV1 book, BONDEquity bondEquity, GSEquity gsEquity, MSEquity msEquity, WFCEquity wfcEquity, XLFEquity xlfEquity, VALBZEquity valbzEquity, VALEEquity valeEquity) {
+    public static int calculatePortfolioValue(BookV1 book, BONDEquity bondEquity, GSEquity gsEquity, MSEquity msEquity, WFCEquity wfcEquity, XLFEquity xlfEquity, VALBZEquity valbzEquity, VALEEquity valeEquity) {
         int portfolioValue = 0;
         Map<String, Integer> ourSells = book.getOurSells();
         Map<String, Integer> positions = book.getPositions();
@@ -237,7 +237,7 @@ public class ClientV1 implements Client {
 
 				System.out.println("Done strategizing.");
 				System.out.println("Cash on hand: " + book.getCash());
-                System.out.println("Value of portfolio: " + this.calculatePortfolioValue(book, bondEquity, gsEquity, msEquity, wfcEquity, xlfEquity, valbzEquity, valeEquity));
+                System.out.println("Value of portfolio: " + calculatePortfolioValue(book, bondEquity, gsEquity, msEquity, wfcEquity, xlfEquity, valbzEquity, valeEquity));
 			}
         } catch (Exception e) {
 			e.printStackTrace();
