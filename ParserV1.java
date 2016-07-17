@@ -98,7 +98,7 @@ public class ParserV1 implements Parser {
 
 	public void parseAck(String[] split) {
 		int orderID = Integer.parseInt(split[1]);
-		// this.book.updateOrder(orderID, "ACK");
+		this.book.ack(orderID);
 	}
 
 	public void parseReject(String[] split) {
@@ -106,7 +106,7 @@ public class ParserV1 implements Parser {
 		String reason = split[2];
 
 		System.out.println("ORDER " + orderID + "REJECTED: " + reason);
-		// this.book.updateOrder(orderID, "REJECTED");
+		this.book.reject(orderID, reason);
 	}
 
 	public void parseFill(String[] split) {
@@ -116,11 +116,11 @@ public class ParserV1 implements Parser {
 		int price = Integer.parseInt(split[4]);
 		int size = Integer.parseInt(split[5]);
 
-		// this.book.fillOrder(orderID, symbol, type, price, size);
+		this.book.fill(orderID, symbol, type, price, size);
 	}
 
 	public void parseOut(String[] split) {
 		int orderID = Integer.parseInt(split[1]);
-		// this.book.updateOrder(orderID, "OUT");
+		this.book.out(orderID);
 	}
 }

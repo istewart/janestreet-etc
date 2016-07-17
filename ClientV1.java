@@ -49,39 +49,35 @@ public class ClientV1 implements Client {
 		return toReturn;
 	}
 
-	public Order buy(Equity e, int price, int size) {
+	public int buy(Equity e, int price, int size) {
 		int order_id = nextID();
 		String symbol = e.getName();
 
-		//OrderV1 order = new OrderV1(order_id, Action.BUY, price, size);
-
 		out.println("ADD " + order_id + " " + symbol + " BUY " + price + " " + size);
-		return null;
+		return orderID;
 	}
 
-	public Order sell(Equity e, int price, int size) {
+	public int sell(Equity e, int price, int size) {
 		int orderID = nextID();
 		String symbol = e.getName();
 
-		//OrderV1 order = new OrderV1(order_id, Action.SELL, price, size);
-
 		out.println("ADD " + orderID + " " + symbol + " SELL " + price + " " + size);
-		return null;
+		return orderID;
 	}
 	
-	public Order cancel(Order o) {
+	public int cancel(Order o) {
 		int orderID = o.getId();
 
 		out.println("CANCEL " + orderID);
-		return null;
+		return orderID;
 	}
 
-	public Order convert(Equity e, int size, String action) {
+	public int convert(Equity e, int size, String action) {
 		int orderID = nextID();
 		String symbol = e.getName();
 
 		out.println("CONVERT " + orderID + " " + symbol + " " + action + " " + size);
-		return null;
+		return orderID;
 	}
 
 	public static void main(String[] args) {
