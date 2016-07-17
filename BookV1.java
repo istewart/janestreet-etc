@@ -50,15 +50,15 @@ public class BookV1 implements Book {
         OrderV1 order = orders.get(orderId);
         String s = order.getName();
         int size = order.getAmount();
-        String type = order.getAction();
+        Action type = order.getAction();
         
-        if (type.equals("BUY")) {
+        if (type.equals(Action.BUY)) {
             if (ourBuys.containsKey(s)) {
                 ourBuys.put(s, ourBuys.get(s) + size);
             } else {
                 ourBuys.put(s, size);
             }
-        } else if (type.equals("SELL")) {
+        } else if (type.equals(Action.SELL)) {
             if (ourSells.containsKey(s)) {
                 ourSells.put(s, ourSells.get(s) + size);
             } else {
@@ -135,7 +135,7 @@ public class BookV1 implements Book {
 	}
 
     public void add(int orderId, String symbol, String actionString, int price, int size) {
-	Action action;
+	Action action = null;
 	if (actionString.equals("BUY")) {
 		action = Action.BUY;
 	}
