@@ -50,10 +50,10 @@ public class ClientV1 implements Client {
 	}
 
 	public int buy(Equity e, int price, int size) {
-		int order_id = nextID();
+		int orderID = nextID();
 		String symbol = e.getName();
 
-		out.println("ADD " + order_id + " " + symbol + " BUY " + price + " " + size);
+		out.println("ADD " + orderID + " " + symbol + " BUY " + price + " " + size);
 		return orderID;
 	}
 
@@ -126,12 +126,14 @@ public class ClientV1 implements Client {
 
 				if (bondAction == Action.BUY) {
 					int numToBuy = 100 - book.getPosition("BOND");
-					c.buy(bondEquity, book.getLowestSellPrice("BOND"), numToBuy);
+					int orderID = c.buy(bondEquity, book.getLowestSellPrice("BOND"), numToBuy);
+					book.add(orderID, "BOND", "BUY", book.getLowestSellPrice("BOND"), numToBuy);
 				}
 
 				if (bondAction == Action.SELL) {
 					int numToSell = -100 + book.getPosition("BOND");
-					c.sell(bondEquity, book.getHighestBuyPrice("BOND"), numToSell);
+					int orderID = c.sell(bondEquity, book.getHighestBuyPrice("BOND"), numToSell);
+					book.add(orderID, "BOND", "SELL", book.getHighestBuyPrice("BOND"), numToSell);
 				}
 
 				System.out.println("Done strategizing.");
