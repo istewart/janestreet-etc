@@ -139,6 +139,7 @@ public class ClientV1 implements Client {
 				}
 
 				System.out.println("Done strategizing.");
+				System.out.println("Cash on hand: " + book.getCash());
 			}
         } catch (Exception e) {
 			e.printStackTrace();

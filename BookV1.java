@@ -37,6 +37,10 @@ public class BookV1 implements Book {
 		this.cash = cash;
 	}
 
+	public int getCash() {
+		return this.cash;
+	}
+
 	public int getHighestBuyPrice(String s) {
         if (buy.get(s) == null || buy.get(s).size() == 0) {
             return Integer.MIN_VALUE;
