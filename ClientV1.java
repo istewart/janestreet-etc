@@ -165,8 +165,6 @@ public class ClientV1 implements Client {
 			System.out.println("Strategies initialized.");
 
 			while (true) {
-				System.out.println("Looping.");
-
 				//update book
 				String s = c.in.readLine();
 				if (s == null) {
@@ -175,8 +173,6 @@ public class ClientV1 implements Client {
 				}
 
 				p.parse(s);
-
-				System.out.println("Done parsing.");
 
 				// determine actions
 				Action bondAction = bondStrategy.determineAction();
@@ -192,7 +188,7 @@ public class ClientV1 implements Client {
 				}
 
 				if (bondAction == Action.SELL) {
-					int numToSell = -100 + book.getPosition("BOND");
+					int numToSell = 100 + book.getPosition("BOND");
 					int orderID = c.sell(bondEquity, book.getHighestBuyPrice("BOND"), numToSell);
 					book.add(orderID, "BOND", "SELL", book.getHighestBuyPrice("BOND"), numToSell);
 				}
@@ -206,13 +202,13 @@ public class ClientV1 implements Client {
 				}
 
 				if (valeAction == Action.SELL) {
-					int numToSell = -10 + book.getPosition("VALE");
+					int numToSell = 10 + book.getPosition("VALE");
 					int orderID = c.sell(valeEquity, book.getHighestBuyPrice("VALE"), numToSell);
 					book.add(orderID, "VALE", "SELL", book.getHighestBuyPrice("VALE"), numToSell);
 				}
 
 				if (valeAction == Action.CONVERT) {
-					int numToBuy = 10 - book.getPosition("VALE");
+					int numToBuy = 10 + book.getPosition("VALE");
 					int orderID = c.convert(valeEquity, numToBuy, "BUY");
 				}
 
@@ -225,17 +221,16 @@ public class ClientV1 implements Client {
 				}
 
 				if (valbzAction == Action.SELL) {
-					int numToSell = -10 + book.getPosition("VALBZ");
+					int numToSell = 10 + book.getPosition("VALBZ");
 					int orderID = c.sell(valbzEquity, book.getHighestBuyPrice("VALBZ"), numToSell);
 					book.add(orderID, "VALBZ", "SELL", book.getHighestBuyPrice("VALBZ"), numToSell);
 				}
 
 				if (valbzAction == Action.CONVERT) {
-					int numToBUY = 10 - book.getPosition("VALBZ");
+					int numToBUY = 10 + book.getPosition("VALBZ");
 					int orderID = c.convert(valbzEquity, numToBUY, "BUY");				
 				}
 
-				System.out.println("Done strategizing.");
 				System.out.println("Cash on hand: " + book.getCash());
                 System.out.println("Value of portfolio: " + calculatePortfolioValue(book, bondEquity, gsEquity, msEquity, wfcEquity, xlfEquity, valbzEquity, valeEquity));
 			}
