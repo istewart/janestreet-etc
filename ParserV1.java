@@ -13,16 +13,16 @@ public class ParserV1 implements Parser {
 		String[] split = s.split(" ");
 
 		switch (split[0]) {
-			case "HELLO": parseHello(split);
-			case "OPEN": parseOpen(split);
-			case "CLOSE": parseClose(split);
-			case "ERROR": parseError(split);
-			case "BOOK": parseBook(split);
-			case "TRADE": parseTrade(split);
-			case "ACK": parseAck(split);
-			case "REJECT": parseReject(split);
-			case "FILL": parseFill(split);
-			case "OUT": parseOut(split);
+			case "HELLO": parseHello(split); break;
+			case "OPEN": parseOpen(split); break;
+			case "CLOSE": parseClose(split); break;
+			case "ERROR": parseError(split); break;
+			case "BOOK": parseBook(split); break;
+			case "TRADE": parseTrade(split); break;
+			case "ACK": parseAck(split); break;
+			case "REJECT": parseReject(split); break;
+			case "FILL": parseFill(split); break;
+			case "OUT": parseOut(split); break;
 		}
 	}
 
